@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jai Ntl - Bio</title>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Jai Ntl">
+  <meta property="og:description" content="Welcome to my Bio">
+
+  <!-- Google Fonts & Font Awesome Icons (v6.5.1) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700&family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Noto Sans Lao', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background Canvas ສໍາລັບດາວຕົກ ແລະ ແສງລະຍິບລະຍັບ */
+    #space-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 390px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 32px 24px;
+      border-radius: 38px;
+      backdrop-filter: blur(30px) saturate(190%);
+      -webkit-backdrop-filter: blur(30px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      position: relative;
+      z-index: 1;
+      animation: iosFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes iosFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.96) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* ຮູບໂປຣຟາຍດາວສະໄຕລ໌ iOS Glow */
+    .profile-img-wrapper {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .profile-star-icon {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.4),
+                  inset 0 0 15px rgba(255, 255, 255, 0.2);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .profile-star-icon i {
+      font-size: 3.2rem;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    }
+
+    .profile-img-wrapper:hover .profile-star-icon {
+      transform: scale(1.08) rotate(15deg);
+    }
+
+    /* ⚪ ຊື່ສີຂາວ ແບບ Font ປົກກະຕິ ພ້ອມ Animation ແສງ Glow ⚪ */
+    .normal-name {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Noto Sans Lao', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      text-align: center;
+      letter-spacing: 0.5px;
+      animation: whiteGlow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes whiteGlow {
+      0% {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+                     0 0 10px rgba(255, 255, 255, 0.2);
+      }
+      100% {
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.8),
+                     0 0 22px rgba(255, 255, 255, 0.5),
+                     0 0 35px rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    /* ປ່ຽນເປັນ Font ປົກກະຕິ */
+    .bio {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Noto Sans Lao', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: rgba(235, 235, 245, 0.7);
+      margin-bottom: 24px;
+      letter-spacing: 0.2px;
+    }
+
+    /* ໄອຄອນໂຊເຊຍລ໌ iOS Glass Buttons */
+    .social-icons {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .social-icons a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      font-size: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .social-icons a:hover {
+      transform: translateY(-3px) scale(1.08);
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+    }
+
+    .social-icons a:active {
+      transform: scale(0.95);
+    }
+
+    /* ປຸ່ມລິ້ງ iOS Ultra Smooth Glass Buttons (Font ປົກກະຕິ) */
+    .link-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 22px;
+      padding: 12px 18px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #ffffff;
+      text-decoration: none;
+      cursor: pointer;
+      font-family: inherit;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .link-btn:hover {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.45);
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
+                  0 0 15px rgba(255, 255, 255, 0.1);
+    }
+
+    .link-btn:active {
+      transform: scale(0.97);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .icon-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.1rem;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .link-btn:hover .icon-circle {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+    }
+
+    /* ປ່ຽນ Font ຂອງປຸ່ມເປັນ Font ປົກກະຕິ */
+    .btn-text {
+      flex-grow: 1;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Noto Sans Lao', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .link-btn::after {
+      content: '';
+      width: 36px;
+    }
+
+    /* ກ່ອງຂໍ້ຄວາມ (ຈັດຂໍ້ຄວາມຢູ່ກາງ) */
+    .about-card {
+      width: 100%;
+      margin-top: 8px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Noto Sans Lao', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(235, 235, 245, 0.85);
+      line-height: 1.6;
+      font-weight: 400;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas ສໍາລັບພື້ນຫຼັງດາວຕົກ ແລະ ແສງລະຍິບລະຍັບ -->
+  <canvas id="space-bg"></canvas>
+
+  <div class="container">
+    <!-- ຮູບໂປຣຟາຍດາວ ( Star Icon ) -->
+    <div class="profile-img-wrapper">
+      <div class="profile-star-icon">
+        <i class="fa-solid fa-star"></i>
+      </div>
+    </div>
+
+    <!-- ຊື່ໂປຣຟາຍສີຂາວ ແບບ Font ປົກກະຕິ -->
+    <h1 class="normal-name">Jai Ntl</h1>
+    <p class="bio">Welcome to my Bio</p>
+
+    <!-- ໄອຄອນໂຊເຊຍລ໌ -->
+    <div class="social-icons">
+      <a href="https://www.facebook.com/share/1BpNCoxKdz/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/jai.ntl?igsh=MXZ6dzBxb29yZ2pwdg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@Jaintl" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@jai.ntl?_r=1&_t=ZS-98ZImB9Vi8m" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="#" aria-label="Threads"><i class="fa-brands fa-threads"></i></a>
+    </div>
+
+    <!-- ປຸ່ມລິ້ງຕ່າງໆ -->
+    <a href="https://wa.me/8562078268304" class="link-btn" target="_blank" rel="noopener noreferrer">
+      <div class="icon-circle">
+        <i class="fa-brands fa-whatsapp"></i>
+      </div>
+      <span class="btn-text">WhatsApp</span>
+    </a>
+
+    <a href="https://www.facebook.com/share/1BpNCoxKdz/?mibextid=wwXIfr" class="link-btn" target="_blank" rel="noopener noreferrer">
+      <div class="icon-circle">
+        <i class="fa-brands fa-facebook-f"></i>
+      </div>
+      <span class="btn-text">Facebook</span>
+    </a>
+
+    <!-- ກ່ອງຂໍ້ຄວາມສ່ວນຕົວ -->
+    <div class="about-card">
+      <p class="about-text">
+          HELLO I'M JAI OR 300RKK
+      </p>
+    </div>
+  </div>
+
+  <!-- JavaScript ສໍາລັບດາວຕົກ ແລະ ແສງລະຍິບລະຍັບ -->
+  <script>
+    const canvas = document.getElementById('space-bg');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // ສ້າງດາວລະຍິບລະຍັບ (Twinkling Stars)
+    const stars = [];
+    const starCount = 120;
+    for (let i = 0; i < starCount; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.5 + 0.5,
+        alpha: Math.random(),
+        twinkleSpeed: Math.random() * 0.02 + 0.005
+      });
+    }
+
+    // ສ້າງດາວຕົກ (Shooting Star Class)
+    class ShootingStar {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * width * 1.5 - width * 0.25;
+        this.y = -20;
+        this.length = Math.random() * 80 + 40;
+        this.speed = Math.random() * 8 + 6;
+        this.size = Math.random() * 1.5 + 1;
+        this.waitTime = new Date().getTime() + Math.random() * 3000 + 1000;
+        this.active = false;
+      }
+
+      update() {
+        if (!this.active) {
+          if (new Date().getTime() > this.waitTime) {
+            this.active = true;
+          }
+          return;
+        }
+
+        this.x -= this.speed * 1.2;
+        this.y += this.speed;
+
+        if (this.y > height + 100 || this.x < -100) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        if (!this.active) return;
+
+        ctx.save();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.lineWidth = this.size;
+        ctx.lineCap = 'round';
+
+        const gradient = ctx.createLinearGradient(
+          this.x, this.y,
+          this.x + this.length * 0.8, this.y - this.length * 0.6
+        );
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+        ctx.strokeStyle = gradient;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x + this.length * 0.8, this.y - this.length * 0.6);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    const shootingStars = [new ShootingStar(), new ShootingStar()];
+
+    // Animation Loop
+    function animate() {
+      const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
+      bgGradient.addColorStop(0, '#020208');
+      bgGradient.addColorStop(0.5, '#08081a');
+      bgGradient.addColorStop(1, '#000000');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, width, height);
+
+      // ແຕ້ມດາວລະຍິບລະຍັບ
+      stars.forEach(star => {
+        star.alpha += star.twinkleSpeed;
+        if (star.alpha > 1 || star.alpha < 0) {
+          star.twinkleSpeed = -star.twinkleSpeed;
+        }
+
+        ctx.save();
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+        ctx.shadowBlur = star.radius * 4;
+        ctx.shadowColor = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // ແຕ້ມດາວຕົກ
+      shootingStars.forEach(shootingStar => {
+        shootingStar.update();
+        shootingStar.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>
